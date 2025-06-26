@@ -41,6 +41,7 @@ def language1(v: set[str], t: set[str], s: str, p: dict[str, list[str]], max_ite
         visited.add(initial)
         if iterations >= max_iterations:
             continue
+        print(iterations)
 
         if all(x in t for x in initial):
             ans.add(initial)
@@ -85,4 +86,4 @@ p = {'S': ['A'], 'A': ['aA', 'bS', 'B', ''], 'B': ['bB', 'aA', 'bS']}
 # s = 'S'
 # p = {'S': ['0', '11S']}
 
-print(language1(v, t, s, p, 25))
+# print(language1(v, t, s, p, 50))
