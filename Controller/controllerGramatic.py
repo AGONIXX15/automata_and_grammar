@@ -89,6 +89,28 @@ class GrammarController:
         window.destroy()
         parent.deiconify()
 
+    def verify_word(self, word: str):
+        if not word:
+            mb.showerror("Error", "Debe ingresar una palabra para verificar.")
+            return
+
+        if any(c not in self.gramatic.terminals for c in word):
+            mb.showinfo("resultado", f"la palabra {word} no es válida.")
+            return
+        from Model import earley_parser
+        gramatic: Gramatic = self.gramatic
+        is_valid: bool = earley_parser(
+            word, gramatic.productions, gramatic.start_symbol, gramatic.terminals)
+        if is_valid:
+            mb.showinfo("Resultado", f"La palabra '{word}' es válida.")
+        else:
+            mb.showinfo("Resultado", f"La palabra '{word}' no es válida.")
+
+    def is_build(self) -> bool:
+        """Verifica si la gramática ha sido construida."""
+        return bool(self.gramatic.non_terminals and self.gramatic.terminals and self.gramatic.productions)
+
+
 # if __name__ == "__main__":
 #     app = GramaticGui()
 #     app.mainloop()
