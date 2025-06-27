@@ -4,13 +4,14 @@ from customtkinter import CTkButton, CTkFrame, \
 
 import customtkinter as ctk
 
-from controllerGramatic import GrammarController
+from Controller.controllerGramatic import GrammarController
 
 
 class GrammarPanel(CTkFrame):
     def __init__(self, master, controller: GrammarController):
         super().__init__(master)
         self.controller = controller
+        self.n_words = "10"
 
         CTkLabel(self, text="No terminales (separados por coma):").grid(
             row=0, column=0, sticky="w", padx=10)
@@ -32,14 +33,26 @@ class GrammarPanel(CTkFrame):
         CTkButton(self, text="Ver gramática actual",
                   command=self.controller.show_grammar).grid(row=7, column=0, pady=5)
 
-        CTkButton(self, text="generar palabras", command=self.controller.generate_words).grid(
-            row=8, column=0, pady=10)
+        self.entry_generate = CTkEntry(
+            self, width=300, placeholder_text="Cantidad de palabras a generar (por defecto 10)")
+        self.entry_generate.grid(
+            row=8, column=0, padx=10, pady=(10, 5))
+
+        CTkButton(self, text="generar palabras", command=self.generate).grid(
+            row=10, column=0, pady=10)
 
     def accept(self):
         nts = self.entry_nt.get()
         ts = self.entry_t.get()
+        n_words = self.entry_generate.get()
         rules = self.rules_textbox.get("0.0", "end")
-        self.controller.build_grammar(nts, ts, rules)
+        self.controller.build_grammar(nts, ts, rules, n_words)
+
+    def generate(self):
+        n_words = self.entry_generate.get()
+        if not n_words.isdecimal():
+            n_words = "10"
+        self.controller.generate_words(n_words)
 
 
 class OutputPanel(CTkFrame):
