@@ -4,7 +4,7 @@ from tkinter import messagebox as mb
 
 from Model.gramaticModel import Gramatic
 
-from gramatic import language1
+from Model.gramatic import language1
 
 
 class GrammarController:
@@ -85,6 +85,9 @@ class GrammarController:
                          string)
         self.output_panel.textbox.configure(state="disable")
 
+    def go_back(self, window, parent):
+        window.destroy()
+        parent.deiconify()
 
 # if __name__ == "__main__":
 #     app = GramaticGui()

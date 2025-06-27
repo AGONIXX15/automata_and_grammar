@@ -1,10 +1,9 @@
-from typing import Optional
 from customtkinter import CTkButton, CTkFrame, \
-    CTkLabel, CTkScrollableFrame, CTkTextbox, CTkToplevel, CTkEntry, CTk
+    CTkLabel, CTkTextbox, CTkToplevel, CTkEntry, CTk
 
 import customtkinter as ctk
 
-from Controller.controllerGramatic import GrammarController
+from Controller import GrammarController
 
 
 class GrammarPanel(CTkFrame):
@@ -39,7 +38,9 @@ class GrammarPanel(CTkFrame):
             row=8, column=0, padx=10, pady=(10, 5))
 
         CTkButton(self, text="generar palabras", command=self.generate).grid(
-            row=10, column=0, pady=10)
+            row=9, column=0, pady=10)
+        CTkButton(self, text="Volver", command=lambda: self.controller.go_back(master, master.parent)).grid(
+            row=10, column=0, columnspan=2,pady=(5, 10))
 
     def accept(self):
         nts = self.entry_nt.get()
@@ -66,10 +67,11 @@ class OutputPanel(CTkFrame):
         self.textbox.insert("0.0", text)
 
 
-class GramaticGui(CTk):
-    def __init__(self):
+class GramaticGui(CTkToplevel):
+    def __init__(self, parent):
         super().__init__()
-        self.geometry("1000x600")
+        self.parent = parent
+        self.geometry("1000x650")
         self.title("Gramatic GUI")
 
         self.output_panel: OutputPanel = OutputPanel(self)
@@ -81,6 +83,7 @@ class GramaticGui(CTk):
         self.grammar_panel: GrammarPanel = GrammarPanel(self, self.controller)
         self.grammar_panel.pack(side="left", fill="both",
                                 expand=True, padx=20, pady=20)
+        self.protocol("WM_DELETE_WINDOW", lambda: self.controller.go_back(self, self.parent))
 
 
 if __name__ == '__main__':
