@@ -101,3 +101,8 @@ productions = {
 }
 t = {"a", "b"}
 # a*b
+<<<<<<< HEAD:Model/earley.py
+=======
+
+print(earley_parser("aaab", productions, s, t))  # True
+>>>>>>> bf17088 (rebase with the main branch):earley.py
