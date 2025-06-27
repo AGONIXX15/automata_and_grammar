@@ -43,17 +43,10 @@ class MainApp(ctk.CTk):
         self.mainloop()
 
     def go_to_gramatic(self):
-<<<<<<< HEAD
         from .gramaticView import GramaticGui
         self.withdraw()
         GramaticGui(self)
     
-    def go_to_state_machine(self):
-        from .state_machine_view import StateMachineView
-        self.withdraw()
-        StateMachineView(self)
-=======
-        pass
     
     def go_to_state_machine(self):
         from state_machine_view import StateMachineView
@@ -63,4 +56,3 @@ class MainApp(ctk.CTk):
 if __name__ == "__main__":
     app = MainApp()
     app.display()
->>>>>>> fc636c4 (Cambios de Nicolas (rubio es una sapa))
