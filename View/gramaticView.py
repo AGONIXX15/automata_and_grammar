@@ -1,5 +1,17 @@
+<<<<<<< HEAD
 from typing import Optional
 from tkinter import messagebox as mb
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+from typing import Optional
+from tkinter import messagebox as mb
+=======
+>>>>>>> f48d518 (rubio le encanta la verga larga negra y gorda)
+=======
+from tkinter import messagebox as mb
+>>>>>>> bf17088 (rebase with the main branch)
+>>>>>>> 8a6a18e (rebase with the main branch)
 from customtkinter import CTkButton, CTkFrame, \
     CTkLabel, CTkTextbox, CTkToplevel, CTkEntry, CTk
 
