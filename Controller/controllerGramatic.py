@@ -119,7 +119,7 @@ class GrammarController:
         if any(c not in self.gramatic.terminals for c in word):
             mb.showinfo("resultado", f"la palabra {word} no es válida.")
             return
-        from earley import earley_parser
+        from Model import earley_parser
         gramatic: Gramatic = self.gramatic
         is_valid: bool = earley_parser(
             word, gramatic.productions, gramatic.start_symbol, gramatic.terminals)
