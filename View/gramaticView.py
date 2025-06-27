@@ -1,4 +1,5 @@
 from typing import Optional
+from tkinter import messagebox as mb
 from customtkinter import CTkButton, CTkFrame, \
     CTkLabel, CTkScrollableFrame, CTkTextbox, CTkToplevel, CTkEntry, CTk
 
@@ -41,6 +42,12 @@ class GrammarPanel(CTkFrame):
         CTkButton(self, text="generar palabras", command=self.generate).grid(
             row=10, column=0, pady=10)
 
+        CTkLabel(self, text="verificar palabra").grid(row=11, column=0, sticky="w", padx=10)
+        self.entry_verify = CTkEntry(self, width=300, placeholder_text="Ingrese palabra a verificar")
+        self.entry_verify.grid(row=12, column=0, padx=10, pady=(0, 10))
+        CTkButton(self, text="verificar", command=self.verify).grid(
+            row=13, column=0, pady=(0, 10))
+
     def accept(self):
         nts = self.entry_nt.get()
         ts = self.entry_t.get()
@@ -53,6 +60,16 @@ class GrammarPanel(CTkFrame):
         if not n_words.isdecimal():
             n_words = "10"
         self.controller.generate_words(n_words)
+
+    def verify(self):
+        if not self.controller.is_build():
+            mb.showerror("Error", "Debe construir la gramática primero.")
+            return
+        word = self.entry_verify.get()
+        if not word:
+            mb.showerror("Error", "Debe ingresar una palabra a verificar.")
+            return
+        self.controller.verify_word(word)
 
 
 class OutputPanel(CTkFrame):

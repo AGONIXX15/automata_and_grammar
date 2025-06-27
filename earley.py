@@ -39,7 +39,7 @@ def completer(state: State, charts: list[set[State]], index: int):
                 charts[index].add(new_state)
 
 
-def predictor(state: State, charts: list[set[State]], index: int, productions: dict[str, list[str]]):
+def predictor(state: State, charts: list[set[State]], index: int, productions: dict[str, set[str]]):
     symbol = state.next_symbol()
     if symbol is None:
         return
@@ -58,7 +58,7 @@ def scanner(state: State, charts: list[set[State]], index: int, input_string: st
             charts[index + 1].add(new_state)
 
 
-def earley_parser(input_string: str, production: dict[str, list[str]], s: str, t: set[str],) -> bool:
+def earley_parser(input_string: str, production: dict[str, set[str]], s: str, t: set[str],) -> bool:
     """Implementacion del algoritmo de Earley para el analisis sintactico"""
     n = len(input_string)
     charts: list[set[State]] = [set() for _ in range(n + 1)]
@@ -96,9 +96,10 @@ def earley_parser(input_string: str, production: dict[str, list[str]], s: str, t
 
 s = "S"
 productions = {
-    "S": ["A"],
-    "A": ["aA", "b"],
+    "S": {"A"},
+    "A": {"aA", "b"},
 }
 t = {"a", "b"}
 # a*b
 
+print(earley_parser("aaab", productions, s, t))  # True
