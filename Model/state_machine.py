@@ -69,26 +69,3 @@ def fsm_final(transmisions: list[str], checksum: list[str]):
     for transmision in transmisions:
         count += 1 if fsm_verify(precompute, transmision[9:14]) else 0
     return count/len(transmisions) * 100
-
-
-transmisiones = [
-    "01001001110101101100101101010110",
-    "11000101100101011010001001001011",
-    "10111001110010111010100100100101",
-    "01101100110001001011101010101010",  # valida
-    "00111011011011000101011011100100",
-    "10011011101110110111011101010101",
-    "01110110100010101010101011011001",
-    "00100101110011010101010011101001",  # valida
-    "11101010010111011101010110101100",  # valida
-    "10011110010010101001011101010110"
-]
-
-validacion = [
-    "0010",  # 2
-    "0101",  # 5
-    "1000",  # 8
-    "1111"   # 15
-]
-
-print(fsm_final(transmisiones, validacion))

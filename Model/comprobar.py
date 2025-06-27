@@ -107,3 +107,4 @@ productions = {
 # a*b
 print(earley_parser("aaaaaaaaab", productions,
       s, {"a", "b"}, {"S", "A"}))  # True
+
