@@ -1,6 +1,6 @@
 import re
 from collections import deque
-from gramaticModel import Gramatic
+from Model import Gramatic
 
 
 # diccionario guarda lista string
@@ -31,7 +31,7 @@ def language(v: set[str], t: set[str], s: str, p: dict[str, list[str]], max_iter
     return ans
 
 
-def language1(gramatic: Gramatic, max_iterations: int) -> set[str]:
+def language1(gramatic: Gramatic, max_iterations: int = 20, limit_words: int = 10) -> set[str]:
     v = gramatic.vocabulary
     t = gramatic.terminals
     s = gramatic.start_symbol
@@ -41,12 +41,13 @@ def language1(gramatic: Gramatic, max_iterations: int) -> set[str]:
     visited: set[str] = set()
     while queue:
         initial, iterations = queue.popleft()
+        if len(ans) >= limit_words:
+            break
         if initial in visited:
             continue
         visited.add(initial)
         if iterations >= max_iterations:
             continue
-        print(iterations)
 
         if all(x in t for x in initial):
             ans.add(initial)

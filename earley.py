@@ -102,5 +102,3 @@ productions = {
 t = {"a", "b"}
 # a*b
 
-print(earley_parser("aab", productions, s, t))
-print(earley_parser("aab", productions, s, t))

@@ -54,7 +54,6 @@ def fsm_mod5(string: str):
 
 def fsm_verify(precompute: list[int], string: str, index: int) -> bool:
     if fsm_mod3(string) == 0 and (5 - fsm_mod5(string)) % 5 == precompute[index]:
-        print(index)
         return True
     return False
 
@@ -105,5 +104,3 @@ if __name__ == '__main__':
         "0010",  # 2
     ]
 
-    print(fsm_final(transmisiones, validacion))
-    print(fsm_mod5("00000101"))
