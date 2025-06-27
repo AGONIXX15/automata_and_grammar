@@ -37,8 +37,6 @@ def completer(state: State, charts: list[set[State]], index: int):
             new_state = prev_state.advance()
             if new_state not in charts[index]:
                 charts[index].add(new_state)
-                return True
-    return False
 
 
 def predictor(state: State, charts: list[set[State]], index: int, productions: dict[str, list[str]]):
@@ -50,8 +48,6 @@ def predictor(state: State, charts: list[set[State]], index: int, productions: d
         new_state: State = State(symbol, [], list(production), index)
         if new_state not in charts[index]:
             charts[index].add(new_state)
-            return True
-    return False
 
 
 def scanner(state: State, charts: list[set[State]], index: int, input_string: str):
@@ -60,10 +56,9 @@ def scanner(state: State, charts: list[set[State]], index: int, input_string: st
         new_state = state.advance()
         if new_state not in charts[index + 1]:
             charts[index + 1].add(new_state)
-            return True
 
 
-def earley_parser(input_string: str, production: dict[str, list[str]], s: str, t: set[str], N: set[str]) -> bool:
+def earley_parser(input_string: str, production: dict[str, list[str]], s: str, t: set[str],) -> bool:
     """Implementacion del algoritmo de Earley para el analisis sintactico"""
     n = len(input_string)
     charts: list[set[State]] = [set() for _ in range(n + 1)]
@@ -83,7 +78,7 @@ def earley_parser(input_string: str, production: dict[str, list[str]], s: str, t
                         changed = True
                 else:
                     next_symbol = state.next_symbol()
-                    if next_symbol in N:
+                    if next_symbol in production:
                         size_before: int = len(charts[i])
                         predictor(state, charts, i, production)
                         # verificamos si cambio algo en el chart
@@ -104,7 +99,8 @@ productions = {
     "S": ["A"],
     "A": ["aA", "b"],
 }
+t = {"a", "b"}
 # a*b
-print(earley_parser("aaaaaaaaab", productions,
-      s, {"a", "b"}, {"S", "A"}))  # True
 
+print(earley_parser("aab", productions, s, t))
+print(earley_parser("aab", productions, s, t))
