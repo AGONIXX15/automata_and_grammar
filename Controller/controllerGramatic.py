@@ -85,9 +85,6 @@ class GrammarController:
                          string)
         self.output_panel.textbox.configure(state="disable")
 
-    def go_back(self, window, parent):
-        window.destroy()
-        parent.deiconify()
 
     def verify_word(self, word: str):
         if not word:
@@ -110,6 +107,9 @@ class GrammarController:
         """Verifica si la gramática ha sido construida."""
         return bool(self.gramatic.non_terminals and self.gramatic.terminals and self.gramatic.productions)
 
+    def go_back(self, window, parent):
+        window.destroy()
+        parent.deiconify()
 
 # if __name__ == "__main__":
 #     app = GramaticGui()

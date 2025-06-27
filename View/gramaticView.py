@@ -1,3 +1,4 @@
+from typing import Optional
 from tkinter import messagebox as mb
 from customtkinter import CTkButton, CTkFrame, \
     CTkLabel, CTkTextbox, CTkToplevel, CTkEntry, CTk

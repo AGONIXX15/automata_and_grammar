@@ -47,9 +47,8 @@ class MainApp(ctk.CTk):
         self.withdraw()
         GramaticGui(self)
     
-    
     def go_to_state_machine(self):
-        from state_machine_view import StateMachineView
+        from .state_machine_view import StateMachineView
         self.withdraw()
         StateMachineView(self)
 
