@@ -1,5 +1,6 @@
 import re
 from collections import deque
+from gramaticModel import Gramatic
 
 
 # diccionario guarda lista string
@@ -30,7 +31,11 @@ def language(v: set[str], t: set[str], s: str, p: dict[str, list[str]], max_iter
     return ans
 
 
-def language1(v: set[str], t: set[str], s: str, p: dict[str, list[str]], max_iterations: int) -> set[str]:
+def language1(gramatic: Gramatic, max_iterations: int) -> set[str]:
+    v = gramatic.vocabulary
+    t = gramatic.terminals
+    s = gramatic.start_symbol
+    p = gramatic.productions
     queue = deque([(s, 0)])
     ans: set[str] = set()
     visited: set[str] = set()
@@ -55,35 +60,35 @@ def language1(v: set[str], t: set[str], s: str, p: dict[str, list[str]], max_ite
     return ans
 
 
-def check(v: set[str], t: set[str], s: str, p: dict[str, list[str]], word: str, max_iterations: int) -> bool:
-    if any(ch not in t for ch in word):
-        return False
-    queue = deque([(s, 0)])
-    while queue:
-        current_str, level = queue.popleft()
-        if level >= max_iterations:
-            return False
+# def check(v: set[str], t: set[str], s: str, p: dict[str, list[str]], word: str, max_iterations: int) -> bool:
+#     if any(ch not in t for ch in word):
+#         return False
+#     queue = deque([(s, 0)])
+#     while queue:
+#         current_str, level = queue.popleft()
+#         if level >= max_iterations:
+#             return False
 
-        if current_str == word:
-            return True
+#         if current_str == word:
+#             return True
 
-        for key, values in p.items():
-            for match in re.finditer(key, current_str):
-                for val in values:
-                    new_str: str = "".join(
-                        current_str[:match.start()] + val + current_str[match.end():])
-                    if len(new_str) <= len(word):
-                        queue.append((new_str, level+1))
+#         for key, values in p.items():
+#             for match in re.finditer(key, current_str):
+#                 for val in values:
+#                     new_str: str = "".join(
+#                         current_str[:match.start()] + val + current_str[match.end():])
+#                     if len(new_str) <= len(word):
+#                         queue.append((new_str, level+1))
 
 
-v = {'a', 'b', 'A', 'B', 'S'}
-t = {'a', 'b'}
-s = 'S'
-p = {'S': ['A'], 'A': ['aA', 'bS', 'B', ''], 'B': ['bB', 'aA', 'bS']}
+# v = {'a', 'b', 'A', 'B', 'S'}
+# t = {'a', 'b'}
+# s = 'S'
+# p = {'S': {'A'}, 'A': {'aA', 'bS', 'B', ''}, 'B': {'bB', 'aA', 'bS'}}
 
 # v = {'0', '1'}
 # t = {'0', '1'}
 # s = 'S'
 # p = {'S': ['0', '11S']}
 
-# print(language1(v, t, s, p, 50))
+# print(language1(v, t, s, p, 20))
