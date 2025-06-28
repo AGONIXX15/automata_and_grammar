@@ -1,5 +1,3 @@
-from typing import Dict, List, Set
-from customtkinter import CTk, CTkFrame, CTkLabel, CTkButton, CTkTextbox, CTkEntry
 from tkinter import messagebox as mb
 
 from Model.gramaticModel import Gramatic
@@ -11,7 +9,7 @@ class GrammarController:
     def __init__(self, output_panel):
         self.gramatic = Gramatic()
         self.output_panel = output_panel
-        self.n_words = 10  # Default number of words to generate
+        self.n_words = 10  # Numero de palabras a generar por defecto
 
     def build_grammar(self, nts: str, ts: str, rules_text: str, n_words: str):
         self.output_panel.textbox.configure(state="normal")
@@ -110,8 +108,3 @@ class GrammarController:
         window.destroy()
         parent.deiconify()
         
-
-
-# if __name__ == "__main__":
-#     app = GramaticGui()
-#     app.mainloop()
