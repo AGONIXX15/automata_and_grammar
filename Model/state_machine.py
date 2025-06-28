@@ -72,7 +72,8 @@ def fsm_final(transmisions: list[str], checksum: list[str]):
     count: int = 0
     for index, transmision in enumerate(transmisions):
         count += 1 if fsm_verify(precompute, transmision[9:14], index) else 0
-    return count/len(transmisions) * 100
+
+    return (((len(transmisions) - count)/len(transmisions)) * 100)
 
 
 if __name__ == '__main__':

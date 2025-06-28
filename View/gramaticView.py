@@ -39,10 +39,12 @@ class GrammarPanel(CTkFrame):
         CTkButton(self, text="generar palabras", command=self.generate).grid(
             row=9, column=0, pady=10)
         CTkButton(self, text="Volver", command=lambda: self.controller.go_back(master, master.parent)).grid(
-            row=10, column=0, columnspan=2,pady=(5, 10))
+            row=10, column=0, columnspan=2, pady=(5, 10))
 
-        CTkLabel(self, text="verificar palabra").grid(row=11, column=0, sticky="w", padx=10)
-        self.entry_verify = CTkEntry(self, width=300, placeholder_text="Ingrese palabra a verificar")
+        CTkLabel(self, text="verificar palabra").grid(
+            row=11, column=0, sticky="w", padx=10)
+        self.entry_verify = CTkEntry(
+            self, width=300, placeholder_text="Ingrese palabra a verificar")
         self.entry_verify.grid(row=12, column=0, padx=10, pady=(0, 10))
         CTkButton(self, text="verificar", command=self.verify).grid(
             row=13, column=0, pady=(0, 10))
@@ -98,6 +100,5 @@ class GramaticGui(CTkToplevel):
         self.grammar_panel: GrammarPanel = GrammarPanel(self, self.controller)
         self.grammar_panel.pack(side="left", fill="both",
                                 expand=True, padx=20, pady=20)
-        self.protocol("WM_DELETE_WINDOW", lambda: self.controller.go_back(self, self.parent))
-
-
+        self.protocol("WM_DELETE_WINDOW",
+                      lambda: self.controller.go_back(self, self.parent))
